@@ -81,7 +81,6 @@ export default function Footer() {
     <footer className="border-t border-gray-100 bg-white">
       <div className="mx-auto max-w-7xl px-6 py-14">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
-          {/* Brand */}
           <div>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -127,7 +126,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Support */}
           <div>
             <h4 className="mb-4 font-bold text-gray-900">Support</h4>
             <ul className="space-y-2">
@@ -144,7 +142,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter */}
           <div>
             <h4 className="mb-1 font-bold text-gray-900">Stay Updated</h4>
             <p className="mb-3 text-sm text-gray-500">
@@ -193,8 +190,6 @@ export default function Footer() {
               </div>
             )}
           </div>
-
-          {/* Trust badges */}
           <div className="mt-4 px-10 flex flex-wrap gap-2">
             {[
               "🔒 Secure Payments",
@@ -212,7 +207,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
       <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-gray-100 pt-6 text-sm text-gray-400 md:flex-row">
         <p>© 2025 TechStore. All rights reserved.</p>
         <div className="flex gap-6">

@@ -31,7 +31,6 @@ function CategoryCard({ icon: Icon, title, desc, onClick }: {
       onClick={onClick}
       className="group cursor-pointer relative overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100 hover:shadow-md transition-all"
     >
-      {/* Blue bottom line — slides in from left on hover */}
       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
       <div className="flex flex-col items-center p-5 text-center">
@@ -48,7 +47,6 @@ export default function Hero({ onCategorySelect, onScrollToProducts }: HeroProps
     <section className="bg-gradient-to-br from-slate-50 via-white to-slate-100">
       <div className="mx-auto max-w-7xl px-6 py-5 flex flex-col items-center text-center">
 
-        {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -58,7 +56,6 @@ export default function Hero({ onCategorySelect, onScrollToProducts }: HeroProps
           New Arrivals Available
         </motion.div>
 
-        {/* Heading */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -69,7 +66,6 @@ export default function Hero({ onCategorySelect, onScrollToProducts }: HeroProps
           <span className="text-blue-600">Exceptional Prices</span>
         </motion.h1>
 
-        {/* Subheading */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -80,7 +76,6 @@ export default function Hero({ onCategorySelect, onScrollToProducts }: HeroProps
           Free shipping on orders over ₹1000.
         </motion.p>
 
-        {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -103,7 +98,6 @@ export default function Hero({ onCategorySelect, onScrollToProducts }: HeroProps
           </Button>
         </motion.div>
 
-        {/* Category Cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -1,13 +1,3 @@
-/**
- * SEED SCRIPT — run once to push your 14 products into MongoDB
- *
- * How to run:
- *   npx tsx scripts/seed.ts
- *
- * Install tsx first if needed:
- *   npm install --save-dev tsx
- */
-
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import path from "path";
@@ -20,7 +10,6 @@ if (!MONGODB_URI) {
   process.exit(1);
 }
 
-/* ── Inline schema so the script is self-contained ── */
 const ProductSchema = new mongoose.Schema(
   {
     name: String,
@@ -44,7 +33,6 @@ const ProductSchema = new mongoose.Schema(
 const Product =
   mongoose.models.Product || mongoose.model("Product", ProductSchema);
 
-/* ── Your 14 products ── */
 const products = [
   {
     name: "iPhone 15 Pro Max",
@@ -256,23 +244,15 @@ const products = [
 
 async function seed() {
   try {
-    console.log("🔌  Connecting to MongoDB...");
     await mongoose.connect(MONGODB_URI);
-    console.log("✅  Connected!");
-
-    // Check if already seeded
     const existing = await Product.countDocuments();
     if (existing > 0) {
       console.log(
         `⚠️   Products collection already has ${existing} documents.`,
       );
-      console.log("     Delete them first if you want to re-seed:");
-      console.log("     db.products.deleteMany({})");
       await mongoose.disconnect();
       return;
     }
-
-    console.log("🌱  Seeding 14 products...");
     await Product.insertMany(
       products.map((p) => ({
         ...p,
@@ -280,12 +260,10 @@ async function seed() {
         sellerName: "TechStore",
       })) as any,
     );
-    console.log("✅  14 products inserted successfully!");
   } catch (err) {
-    console.error("❌  Seed error:", err);
+    console.error("❌  Seeding error:", err);
   } finally {
     await mongoose.disconnect();
-    console.log("🔌  Disconnected.");
   }
 }
 

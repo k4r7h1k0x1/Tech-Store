@@ -11,7 +11,6 @@ const ReviewModel = Review as Model<any>;
 const ProductModel = Product as Model<any>;
 const UserModel = User as Model<any>;
 
-/* ── GET /api/reviews?productId=xxx ── */
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
@@ -46,7 +45,6 @@ export async function GET(req: Request) {
   }
 }
 
-/* ── POST /api/reviews ── */
 export async function POST(req: Request) {
   try {
     const auth = await getAuthUser();
@@ -61,13 +59,11 @@ export async function POST(req: Request) {
 
     await dbConnect();
 
-    // Get user's name
     const user = await UserModel.findById(auth.userId).select("name").lean() as any;
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    // Check for duplicate
     const existing = await ReviewModel.findOne({ productId, userId: auth.userId });
     if (existing) {
       return NextResponse.json({ error: "You have already reviewed this product." }, { status: 409 });
@@ -81,7 +77,6 @@ export async function POST(req: Request) {
       comment:  comment || "",
     });
 
-    // Recalculate product rating
     const allReviews = await ReviewModel.find({ productId }).lean() as any[];
     const numReviews = allReviews.length;
     const avgRating  = allReviews.reduce((s, r) => s + r.rating, 0) / numReviews;
@@ -111,7 +106,6 @@ export async function POST(req: Request) {
   }
 }
 
-/* ── DELETE /api/reviews?productId=xxx ── */
 export async function DELETE(req: Request) {
   try {
     const auth = await getAuthUser();
@@ -127,8 +121,6 @@ export async function DELETE(req: Request) {
 
     await dbConnect();
     await ReviewModel.findOneAndDelete({ productId, userId: auth.userId });
-
-    // Recalculate
     const remaining = await ReviewModel.find({ productId }).lean() as any[];
     const numReviews = remaining.length;
     const avgRating  =

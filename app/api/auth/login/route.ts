@@ -33,7 +33,6 @@ export async function POST(req) {
       );
     }
 
-    // ── set JWT cookie ────────────────────────────────
     const token = signToken(user._id);
     const response = NextResponse.json({
       success: true,

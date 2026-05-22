@@ -23,7 +23,6 @@ export default function ContactPage() {
 
     setLoading(true);
     try {
-      // Simulate sending — replace with real API/EmailJS/Formspree call
       await new Promise((res) => setTimeout(res, 1000));
       setSubmitted(true);
       setForm({ name: "", email: "", message: "" });

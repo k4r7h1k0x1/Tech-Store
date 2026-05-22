@@ -74,7 +74,6 @@ export default function ProductDetailPage() {
     }
   };
 
-  /* ── Fetch product from MongoDB via API ── */
   useEffect(() => {
     const id = params?.id;
     if (!id) return;
@@ -117,7 +116,6 @@ export default function ProductDetailPage() {
 
   const cartCount = cartItems.reduce((s, i) => s + i.quantity, 0);
 
-  /* ── Loading state ── */
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50">
@@ -133,7 +131,6 @@ export default function ProductDetailPage() {
     );
   }
 
-  /* ── Not found ── */
   if (notFound || !product) {
     return (
       <div className="min-h-screen bg-gray-50">
@@ -171,7 +168,6 @@ export default function ProductDetailPage() {
       />
 
       <div className="max-w-6xl mx-auto px-6 py-8">
-        {/* Back button */}
         <button
           onClick={() => router.push("/")}
           className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors"
@@ -180,7 +176,6 @@ export default function ProductDetailPage() {
           <span className="text-sm font-medium">Back to products</span>
         </button>
 
-        {/* Product main section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
           {/* Image */}
           <div className="relative aspect-square bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100">
@@ -206,7 +201,6 @@ export default function ProductDetailPage() {
             />
           </div>
 
-          {/* Info */}
           <div className="flex flex-col">
             <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">
               {product.category}
@@ -215,7 +209,6 @@ export default function ProductDetailPage() {
               {product.name}
             </h1>
 
-            {/* Stars */}
             <div className="flex items-center gap-3 mb-5">
               <div className="flex items-center gap-0.5">
                 {[...Array(5)].map((_, i) => (
@@ -237,7 +230,6 @@ export default function ProductDetailPage() {
               </span>
             </div>
 
-            {/* Price */}
             <div className="flex items-center gap-4 mb-5">
               <span className="text-4xl font-bold text-gray-900">
                 ₹{product.price.toLocaleString()}
@@ -257,14 +249,12 @@ export default function ProductDetailPage() {
               )}
             </div>
 
-            {/* Description */}
             {product.description && (
               <p className="text-gray-600 text-base leading-relaxed mb-5">
                 {product.description}
               </p>
             )}
 
-            {/* Seller */}
             {product.sellerName && product.sellerName !== "TechStore" && (
               <p className="text-sm text-gray-500 mb-4">
                 Sold by{" "}
@@ -274,7 +264,6 @@ export default function ProductDetailPage() {
               </p>
             )}
 
-            {/* Stock status */}
             <div className="flex items-center gap-2 mb-6">
               <div
                 className={`w-2 h-2 rounded-full ${isInStock ? "bg-green-500" : "bg-red-500"}`}
@@ -286,7 +275,6 @@ export default function ProductDetailPage() {
               </span>
             </div>
 
-            {/* Buttons */}
             <div className="space-y-3 mb-8">
               {isInStock ? (
                 <div className="flex gap-3">
@@ -334,8 +322,6 @@ export default function ProductDetailPage() {
                 </>
               )}
             </div>
-
-            {/* Perks */}
             <div className="grid grid-cols-3 gap-3">
               {[
                 {
@@ -369,7 +355,6 @@ export default function ProductDetailPage() {
           </div>
         </div>
 
-        {/* Tabs — Specifications + Reviews */}
         <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
           <div className="flex gap-8 border-b border-gray-200 mb-8">
             {[
@@ -396,7 +381,6 @@ export default function ProductDetailPage() {
             ))}
           </div>
 
-          {/* Specifications — shows real product fields */}
           {activeTab === "specifications" && (
             <div className="space-y-0">
               {[
@@ -436,8 +420,6 @@ export default function ProductDetailPage() {
               ))}
             </div>
           )}
-
-          {/* Reviews */}
           {activeTab === "reviews" && <ProductReviews productId={product.id} />}
         </div>
       </div>

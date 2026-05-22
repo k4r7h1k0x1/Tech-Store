@@ -13,12 +13,10 @@ import { getUserOrders } from "@/app/lib/orderService";
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null); // { id, name, email } | null
-  const [loading, setLoading] = useState(true); // true until first /api/auth/me resolves
+  const [user, setUser] = useState(null); 
+  const [loading, setLoading] = useState(true); 
   const [orders, setOrders] = useState([]);
 
-  // ── on mount: ask the server "am I logged in?" ───────
-  // CORRECT:
   useEffect(() => {
     getMe()
       .then((u) => {
@@ -28,7 +26,6 @@ export function AuthProvider({ children }) {
       .finally(() => setLoading(false));
   }, []);
 
-  // ── fetch orders whenever user changes ────────────────
   const fetchOrders = useCallback(async () => {
     if (!user) {
       setOrders([]);
@@ -46,7 +43,6 @@ export function AuthProvider({ children }) {
     fetchOrders();
   }, [fetchOrders]);
 
-  // ── logout: clear cookie then wipe local state ────────
   const logout = async () => {
     await logoutAPI();
     setUser(null);

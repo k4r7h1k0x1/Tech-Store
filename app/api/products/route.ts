@@ -4,12 +4,10 @@ import Product from "@/models/Product";
 import { getAuthUser } from "@/app/lib/authHelper";
 import User from "@/models/User";
 
-// Add this helper at the top, after imports:
 function stripHtml(str: string): string {
   return str.replace(/<[^>]*>/g, "").trim();
 }
 
-/* ── GET /api/products — returns all products ── */
 export async function GET() {
   try {
     await dbConnect();
@@ -45,7 +43,6 @@ export async function GET() {
   }
 }
 
-/* ── POST /api/products — authenticated user lists a product ── */
 export async function POST(req: Request) {
   try {
     const auth = await getAuthUser();
@@ -70,7 +67,6 @@ export async function POST(req: Request) {
       inStock,
     } = body;
 
-    /* ── Validation ── */
     if (!name || !category || !categoryId || !price || !image) {
       return NextResponse.json(
         { error: "Name, category, price, and image are required." },
@@ -81,10 +77,10 @@ export async function POST(req: Request) {
       return NextResponse.json(
         { error: "Price must be greater than 0." },
         { status: 400 },
+        
       );
     }
 
-    // Add after the price validation:
     if (!image.startsWith("http") && !image.startsWith("data:image/")) {
       return NextResponse.json(
         { error: "Image must be a valid URL or uploaded image." },
@@ -94,7 +90,6 @@ export async function POST(req: Request) {
 
     await dbConnect();
 
-    /* ── Get seller name from User collection ── */
     const user = await (User.findById(auth.userId) as any)
       .select("name")
       .lean();

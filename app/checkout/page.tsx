@@ -26,12 +26,8 @@ export default function CheckoutPage() {
   const [processing, setProcessing] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [orderId, setOrderId] = useState("");
-
-  // UPI Payment State
   const [showUPIScanner, setShowUPIScanner] = useState(false);
   const [upiId, setUpiId] = useState("");
-
-  // Card Payment State
   const [showCardForm, setShowCardForm] = useState(false);
   const [cardDetails, setCardDetails] = useState({
     cardNumber: "",
@@ -51,7 +47,6 @@ export default function CheckoutPage() {
     country: "India",
   });
 
-  // Load cart from localStorage
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     setCartItems(cart);
@@ -61,7 +56,6 @@ export default function CheckoutPage() {
       return;
     }
 
-    // Fetch addresses
     fetch("/api/address")
       .then((res) => res.json())
       .then((data) => {
@@ -109,8 +103,6 @@ export default function CheckoutPage() {
       alert("Please select a shipping address");
       return;
     }
-
-    // Show payment modals for UPI and Card
     if (paymentMethod === "upi") {
       setShowUPIScanner(true);
       return;
@@ -120,8 +112,6 @@ export default function CheckoutPage() {
       setShowCardForm(true);
       return;
     }
-
-    // Process COD order
     await processOrder();
   };
 
@@ -196,7 +186,6 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-6xl mx-auto px-6">
-        {/* Back Button */}
         <button
           onClick={() => router.push("/")}
           className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors"
@@ -220,9 +209,7 @@ export default function CheckoutPage() {
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Shipping Address */}
             <div className="bg-white rounded-2xl p-6 shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold flex items-center gap-2">
@@ -381,7 +368,6 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            {/* Payment Method */}
             <div className="bg-white rounded-2xl p-6 shadow-sm">
               <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
                 <CreditCard className="w-5 h-5 text-blue-600" />
@@ -411,7 +397,6 @@ export default function CheckoutPage() {
             </div>
           </div>
 
-          {/* Right Column - Order Summary */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-2xl p-6 shadow-sm sticky top-6">
               <h2 className="text-xl font-bold mb-4">Order Summary</h2>
@@ -475,7 +460,6 @@ export default function CheckoutPage() {
         </div>
       </div>
 
-      {/* Success Modal */}
       {showSuccessModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-2xl">
@@ -514,7 +498,6 @@ export default function CheckoutPage() {
         </div>
       )}
 
-      {/* UPI Scanner Modal */}
       {showUPIScanner && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl">
@@ -565,7 +548,6 @@ export default function CheckoutPage() {
         </div>
       )}
 
-      {/* Card Payment Modal */}
       {showCardForm && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl">

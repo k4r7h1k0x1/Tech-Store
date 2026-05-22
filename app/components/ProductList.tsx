@@ -14,7 +14,6 @@ import AuthModal from "@/app/components/AuthModal";
 import { useAuth } from "@/app/context/AuthContext";
 import { motion } from "framer-motion";
 
-/* ─── Types ─────────────────────────────────────────────── */
 interface Product {
   id: string;
   name: string;
@@ -33,7 +32,6 @@ interface Product {
 }
 interface CartItem extends Product { quantity: number; }
 
-/* ─── Sidebar categories ─────────────────────────────────── */
 const categories = [
   { id: "all",         name: "All Products", Icon: null,       color: null },
   { id: "smartphones", name: "Smartphones",  Icon: Smartphone, color: "text-purple-600" },
@@ -47,7 +45,6 @@ const categories = [
 const MAX_PRICE = 10000;
 const CART_KEY = "cart";
 
-/* ─── Colorful dual-thumb price slider ──────────────────── */
 function ColorSlider({
   min, max, value, onChange,
 }: {
@@ -93,7 +90,6 @@ function ColorSlider({
   );
 }
 
-/* ─── Cart helpers — read/write localStorage ────────────── */
 function saveCart(items: CartItem[]) {
   try {
     localStorage.setItem(CART_KEY, JSON.stringify(items));
@@ -110,7 +106,6 @@ function loadCart(): CartItem[] {
   }
 }
 
-/* ─── Main component ─────────────────────────────────────── */
 export default function ProductList() {
   const router = useRouter();
   const { profile } = useAuth();
@@ -125,15 +120,11 @@ export default function ProductList() {
   const [isAuthOpen,         setIsAuthOpen]         = useState(false);
   const [searchQuery,        setSearchQuery]        = useState("");
 
-  /* ✅ FIX: initialise cart from localStorage so it persists across navigation */
   const [cartItems, setCartItems] = useState<CartItem[]>(() => loadCart());
-
-  /* ✅ FIX: whenever cartItems changes, save to localStorage immediately */
   useEffect(() => {
     saveCart(cartItems);
   }, [cartItems]);
 
-  /* ── Fetch products from MongoDB ── */
   useEffect(() => {
     fetch("/api/products")
       .then((r) => r.json())
@@ -141,7 +132,6 @@ export default function ProductList() {
       .catch(() => setLoading(false));
   }, []);
 
-  /* ── Helpers ── */
   const scrollToProducts = () =>
     productsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -173,7 +163,6 @@ export default function ProductList() {
   const removeFromCart = (id: string) =>
     setCartItems((prev) => prev.filter((i) => i.id !== id));
 
-  /* ── Filter ── */
   const filteredProducts = products.filter((p) => {
     const matchCat    = selectedCategory === "all" || p.categoryId === selectedCategory;
     const matchPrice  = p.price >= priceRange[0] && p.price <= priceRange[1];
@@ -206,11 +195,7 @@ export default function ProductList() {
 
       <div ref={productsRef} className="mx-auto max-w-7xl px-6 py-12">
         <div className="flex gap-8">
-
-          {/* ── Sidebar ── */}
           <aside className="w-60 shrink-0 space-y-4">
-
-            {/* Categories */}
             <div className="rounded-3xl bg-white p-6 shadow-sm">
               <h3 className="mb-5 text-xl font-bold text-gray-900">Categories</h3>
               <div className="space-y-1">
@@ -234,13 +219,11 @@ export default function ProductList() {
               </div>
             </div>
 
-            {/* Price Range */}
             <div className="rounded-3xl bg-white p-6 shadow-sm">
               <h3 className="mb-2 text-xl font-semibold text-gray-900">Price Range</h3>
               <ColorSlider min={0} max={MAX_PRICE} value={priceRange} onChange={setPriceRange} />
             </div>
 
-            {/* Availability */}
             <div className="rounded-3xl bg-white p-6 shadow-sm">
               <h3 className="mb-4 text-xl font-semibold text-gray-900">Availability</h3>
               <div className="space-y-1">
@@ -270,7 +253,6 @@ export default function ProductList() {
             </div>
           </aside>
 
-          {/* ── Product grid ── */}
           <div className="flex-1">
             {loading ? (
               <div className="flex items-center justify-center py-32">
@@ -305,7 +287,6 @@ export default function ProductList() {
                         </div>
                       )}
                       <div className="aspect-square overflow-hidden bg-gray-100">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={product.image}
                           alt={product.name}

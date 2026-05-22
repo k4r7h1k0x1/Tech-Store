@@ -1,5 +1,4 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import "@/app/globals.css";
 import Footer from "@/app/components/Footer";
 import React from "react";
 import { AuthProvider } from "@/app/context/AuthContext";

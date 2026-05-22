@@ -162,7 +162,6 @@ export default function AuthModal({ isOpen, onClose, onSignupSuccess }) {
     );
   }
 
-  // ── MAIN VIEW ──────────────────────────────────────────
   return (
     <>
       <div
@@ -178,7 +177,6 @@ export default function AuthModal({ isOpen, onClose, onSignupSuccess }) {
             <X className="w-5 h-5 text-gray-500" />
           </button>
 
-          {/* Logo */}
           <div className="flex items-center justify-center gap-2 mb-8">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500 text-white font-semibold">
               T
@@ -188,7 +186,6 @@ export default function AuthModal({ isOpen, onClose, onSignupSuccess }) {
             </span>
           </div>
 
-          {/* Tabs */}
           <div className="flex bg-gray-100 rounded-xl p-1 mb-6">
             <button
               onClick={() => {
@@ -210,14 +207,12 @@ export default function AuthModal({ isOpen, onClose, onSignupSuccess }) {
             </button>
           </div>
 
-          {/* Error Banner */}
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-3 mb-4">
               {error}
             </div>
           )}
 
-          {/* ── LOGIN FORM ── */}
           {activeTab === "login" && (
             <form onSubmit={handleLoginSubmit} className="space-y-5">
               <div>
@@ -344,7 +339,6 @@ export default function AuthModal({ isOpen, onClose, onSignupSuccess }) {
             </form>
           )}
 
-          {/* ── SIGNUP FORM ── */}
           {activeTab === "signup" && (
             <form onSubmit={handleSignupSubmit} className="space-y-4">
               <div>

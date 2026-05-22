@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
 interface IOrderItem {
-  productId: string;   // ✅ String — supports both old numeric IDs and MongoDB ObjectIds
+  productId: string; 
   name: string;
   price: number;
   quantity: number;
@@ -38,7 +38,7 @@ export interface IOrder extends Document {
 }
 
 const OrderItemSchema = new Schema<IOrderItem>({
-  productId: { type: String, required: true },  // ✅ Was Number, now String
+  productId: { type: String, required: true }, 
   name:      { type: String, required: true },
   price:     { type: Number, required: true },
   quantity:  { type: Number, required: true },

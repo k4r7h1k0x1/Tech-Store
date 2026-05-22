@@ -42,10 +42,7 @@ export default function Navbar({
 
   return (
     <header className="w-full border-b bg-white sticky top-0 z-30 shadow-sm">
-      {/* ── Main bar ─────────────────────────────────── */}
       <div className="mx-auto flex max-w-7xl items-center gap-6 px-6 py-4">
-
-        {/* Logo — same as before */}
         <div
           onClick={() => router.push("/")}
           className="flex items-center gap-3 font-semibold cursor-pointer shrink-0"
@@ -58,7 +55,6 @@ export default function Navbar({
           <span className="text-lg font-semibold">TechStore</span>
         </div>
 
-        {/* Search — same as before */}
         <div className="flex flex-1 justify-center">
           <div className="relative w-full max-w-xl">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
@@ -70,11 +66,9 @@ export default function Navbar({
           </div>
         </div>
 
-        {/* Right side */}
         <div className="flex items-center gap-5">
           {loggedInUserName ? (
             <div className="flex items-center gap-4">
-              {/* ── Orders link — navigates to /orders ── */}
               <button
                 onClick={() => router.push("/orders")}
                 className="text-sm text-slate-600 hover:text-slate-900 font-medium transition-colors hidden sm:block"
@@ -82,7 +76,6 @@ export default function Navbar({
                 Orders
               </button>
 
-              {/* Avatar + name */}
               <button
                 onClick={() => router.push("/profile")}
                 className="flex items-center gap-3 group"
@@ -97,7 +90,6 @@ export default function Navbar({
                 </span>
               </button>
 
-              {/* ── Logout button — turns RED on hover ── */}
               <motion.button
                 onClick={logout}
                 whileHover={{ scale: 1.05 }}
@@ -117,7 +109,6 @@ export default function Navbar({
             </button>
           )}
 
-          {/* Cart — same as before */}
           <button onClick={onCartClick} className="relative">
             <ShoppingCart className="h-5 w-5 cursor-pointer text-slate-600 hover:text-slate-900 transition-colors" />
             <AnimatePresence>
@@ -136,7 +127,6 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* ── Category nav — same as before ────────────── */}
       <nav className="mx-auto max-w-7xl px-6 pb-3">
         <ul className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-600">
           {navCategories.map(({ id, label, icon: Icon }) => (

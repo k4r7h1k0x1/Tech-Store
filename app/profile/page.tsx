@@ -47,7 +47,6 @@ export default function ProfilePage() {
 
   const [activeTab, setActiveTab] = useState<"addresses" | "sell" | "orders">("addresses");
 
-  /* ── Address state ── */
   const [addresses,      setAddresses]      = useState<Address[]>([]);
   const [showAddForm,    setShowAddForm]    = useState(false);
   const [editingAddress, setEditingAddress] = useState<Address | null>(null);
@@ -57,7 +56,6 @@ export default function ProfilePage() {
     city: "", state: "", zipCode: "", country: "India", isDefault: false,
   });
 
-  /* ── Sell product state ── */
   const [sellForm, setSellForm] = useState({
     name: "", categoryId: "smartphones", price: "",
     originalPrice: "", description: "", image: "",
@@ -66,11 +64,9 @@ export default function ProfilePage() {
   const [sellLoading,   setSellLoading]   = useState(false);
   const [sellError,     setSellError]     = useState("");
   const [sellSuccess,   setSellSuccess]   = useState(false);
-  // ✅ NEW: image upload state
   const [imageSource,   setImageSource]   = useState<"url" | "device">("url");
   const [imagePreview,  setImagePreview]  = useState("");
 
-  /* ── Auth guard ── */
   useEffect(() => {
     if (loading) return;
     if (!user) { router.push("/"); return; }
@@ -197,7 +193,6 @@ export default function ProfilePage() {
 
       <div className="max-w-5xl mx-auto px-6 py-12">
 
-        {/* Profile header */}
         <div className="bg-white rounded-2xl p-8 shadow-sm mb-8">
           <div className="flex items-center gap-4">
             <div className="w-20 h-20 rounded-full bg-indigo-100 flex items-center justify-center">
@@ -210,7 +205,6 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Tabs */}
         <div className="flex gap-3 mb-8 flex-wrap">
           {[
             { id: "addresses", label: "Addresses",      icon: MapPin },
@@ -232,7 +226,6 @@ export default function ProfilePage() {
           ))}
         </div>
 
-        {/* ══ ADDRESSES ══ */}
         {activeTab === "addresses" && (
           <div className="bg-white rounded-2xl p-8 shadow-sm">
             <div className="flex items-center justify-between mb-6">
@@ -313,7 +306,6 @@ export default function ProfilePage() {
           </div>
         )}
 
-        {/* ══ SELL A PRODUCT ══ */}
         {activeTab === "sell" && (
           <div className="bg-white rounded-2xl p-8 shadow-sm">
             <div className="flex items-center gap-3 mb-6">
@@ -322,7 +314,6 @@ export default function ProfilePage() {
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">List a Product for Sale</h2>
-                {/* ✅ Fixed: &apos; instead of ' */}
                 <p className="text-sm text-gray-500">Your product appears in the store immediately after submission.</p>
               </div>
             </div>
@@ -371,7 +362,6 @@ export default function ProfilePage() {
                 <textarea placeholder="Describe your product..." value={sellForm.description} onChange={(e) => setSellForm({ ...sellForm, description: e.target.value })} rows={3} className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" />
               </div>
 
-              {/* ✅ NEW: Image — URL or Device Upload */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Product Image *</label>
 
@@ -420,7 +410,6 @@ export default function ProfilePage() {
                       onChange={(e) => {
                         const file = e.target.files?.[0];
                         if (!file) return;
-                        // Check file size (max 2MB for base64 storage)
                         if (file.size > 2 * 1024 * 1024) {
                           setSellError("Image must be under 2MB.");
                           return;
@@ -440,10 +429,8 @@ export default function ProfilePage() {
                   </div>
                 )}
 
-                {/* Preview */}
                 {imagePreview && (
                   <div className="mt-3 relative h-40 w-40 rounded-xl overflow-hidden border border-gray-200 shadow-sm">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={imagePreview} alt="Preview" className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
                     <button
                       type="button"
@@ -484,7 +471,6 @@ export default function ProfilePage() {
           </div>
         )}
 
-        {/* ══ ORDERS ══ */}
         {activeTab === "orders" && (
           <div className="bg-white rounded-2xl p-8 shadow-sm text-center">
             <Package className="w-16 h-16 mx-auto mb-4 text-gray-300" />

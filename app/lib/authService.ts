@@ -1,4 +1,3 @@
-// ── SIGN UP ─────────────────────────────────────────────
 export async function signUp(name, email, password) {
     const res = await fetch("/api/auth/signup", {
         method: "POST",
@@ -11,7 +10,6 @@ export async function signUp(name, email, password) {
     return data.user;
 }
 
-// ── LOGIN ───────────────────────────────────────────────
 export async function login(email, password) {
     const res = await fetch("/api/auth/login", {
         method: "POST",
@@ -24,12 +22,10 @@ export async function login(email, password) {
     return data.user;
 }
 
-// ── LOGOUT ──────────────────────────────────────────────
 export async function logout() {
     await fetch("/api/auth/logout", { method: "POST" });
 }
 
-// ── GET CURRENT USER (reads the JWT cookie automatically) ──
 export async function getMe() {
     const res = await fetch("/api/auth/me");
     const data = await res.json();

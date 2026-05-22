@@ -28,7 +28,6 @@ export default function CartSidebar({
       return;
     }
 
-    // Save cart to localStorage for checkout page and also add some expiration time (e.g. 30 minutes) to clear it if user abandons checkout
     localStorage.setItem("cart", JSON.stringify(cartItems));
     router.push("/checkout");
     onClose();
