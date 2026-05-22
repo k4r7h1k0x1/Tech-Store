@@ -1,0 +1,18 @@
+import mongoose from "mongoose";
+
+const ReviewSchema = new mongoose.Schema(
+  {
+    productId: { type: String, required: true, index: true },
+    userId:    { type: String, required: true },
+    userName:  { type: String, required: true },
+    rating:    { type: Number, required: true, min: 1, max: 5 },
+    comment:   { type: String, default: "" },
+  },
+  { timestamps: true }
+);
+
+// One review per user per product
+ReviewSchema.index({ productId: 1, userId: 1 }, { unique: true });
+
+export default mongoose.models.Review ||
+  mongoose.model("Review", ReviewSchema);
