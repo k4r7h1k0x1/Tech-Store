@@ -416,7 +416,7 @@ export default function AuthModal({ isOpen, onClose, onSignupSuccess }) {
                     type={showConfirmPassword ? "text" : "password"}
                     placeholder="••••••••"
                     value={signupData.confirmPassword}
-                    onChange={(e) =>
+                    onChange={(e) =>  
                       setSignupData({
                         ...signupData,
                         confirmPassword: e.target.value,
@@ -428,7 +428,7 @@ export default function AuthModal({ isOpen, onClose, onSignupSuccess }) {
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"  
                   >
                     {showConfirmPassword ? (
                       <EyeOff className="w-4 h-4" />
@@ -444,7 +444,7 @@ export default function AuthModal({ isOpen, onClose, onSignupSuccess }) {
                   id="terms"
                   className="mt-0.5 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
                 />
-                <label
+                <label 
                   htmlFor="terms"
                   className="text-xs text-gray-500 cursor-pointer"
                 >

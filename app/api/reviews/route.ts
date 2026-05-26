@@ -18,7 +18,6 @@ export async function GET(req: Request) {
     if (!productId) {
       return NextResponse.json({ error: "productId required" }, { status: 400 });
     }
-
     await dbConnect();
     const reviews = await ReviewModel.find({ productId }).sort({ createdAt: -1 }).lean();
 

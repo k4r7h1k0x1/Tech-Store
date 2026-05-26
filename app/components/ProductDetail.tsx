@@ -177,7 +177,6 @@ export default function ProductDetailPage() {
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
-          {/* Image */}
           <div className="relative aspect-square bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100">
             {!isInStock && (
               <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/50 backdrop-blur-sm">
